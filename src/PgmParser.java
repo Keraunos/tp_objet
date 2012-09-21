@@ -9,6 +9,9 @@ import java.io.IOException;
  */
 public class PgmParser {
 	
+	
+	private int maxReadLines = 20;
+	
 	/**
 	 * Reads all the lines of a .pgm file
 	 * @param reader
@@ -23,7 +26,7 @@ public class PgmParser {
 			System.out.println("File content:");
 			
 			int n = 0;
-			while ((line = reader.readLine()) != null && n<100) {
+			while ((line = reader.readLine()) != null && n<maxReadLines) {
 				System.out.print(line+" | ");
 				n++;
 			}
