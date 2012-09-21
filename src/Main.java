@@ -23,13 +23,13 @@ public class Main {
 		
 		// create list of image names
 		ArrayList<String> imgNames = new ArrayList<String>();
-        imgNames.add("lena512x512.pgm");
-        imgNames.add("peppers512x512.pgm");
+	    imgNames.add("lena512x512.pgm");
+	    imgNames.add("peppers512x512.pgm");
 		
-        // initialize selected image index in imgNames
-        int selectedImgIndex = 1; 
-        
-        // open file
+	    // initialize selected image index in imgNames
+	    int selectedImgIndex = 1; 
+	    
+	    // open file
 		File imgFile = new File("resources/img/" + imgNames.get(selectedImgIndex));
 		FileInputStream in;
 		try {

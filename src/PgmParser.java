@@ -9,15 +9,6 @@ import java.io.IOException;
  */
 public class PgmParser {
 	
-	
-	/**
-	 * Default constructor
-	 */
-	public PgmParser() {
-		super();
-	}
-	
-	
 	/**
 	 * Reads all the lines of a .pgm file
 	 * @param reader
