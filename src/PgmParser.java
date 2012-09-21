@@ -16,15 +16,20 @@ public class PgmParser {
 	public void readPgm(BufferedReader reader) {
 		
 		String line = null;
+		
+		// read all lines
 		try {
-			System.out.println("BEGIN -------------");
-			// read all lines
-			while ((line = reader.readLine()) != null) {
-				System.out.println(line);
+			
+			System.out.println("File content:");
+			
+			int n = 0;
+			while ((line = reader.readLine()) != null && n<100) {
+				System.out.print(line+" | ");
+				n++;
 			}
-			System.out.println("END ---------------");
+			if (reader.readLine() != null) System.out.println("\netc...");
+			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

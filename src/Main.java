@@ -1,8 +1,4 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.ArrayList;
 
 /**
@@ -11,39 +7,81 @@ import java.util.ArrayList;
  * @author gaetan
  */
 public class Main {
-
+	
+	public static BufferedReader reader;
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		
-		System.out.println("---------------------");
-		System.out.println("Binary images process");
-		System.out.println("---------------------\n");
+		welcome();
 		
-		// create list of image names
-		ArrayList<String> imgNames = new ArrayList<String>();
-	    imgNames.add("lena512x512.pgm");
-	    imgNames.add("peppers512x512.pgm");
-		
-	    // initialize selected image index in imgNames
-	    int selectedImgIndex = 1; 
-	    
-	    // open file
-		File imgFile = new File("resources/img/" + imgNames.get(selectedImgIndex));
-		FileInputStream in;
 		try {
-			in = new FileInputStream(imgFile);
-		} catch (FileNotFoundException e) {
-			System.out.println("Sorry, the file cannot be found.");
+			reader = loadImage();
+		} catch (Exception e) {
+			exit("Sorry, the file cannot be found.");
 			return;
 		}
-		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		
 		// read file
 		PgmParser parser = new PgmParser();
 		parser.readPgm(reader);
 		
+		exit();
+		
 	}
-
+	
+	
+	/**
+	 * Displays welcome message as program starts
+	 */
+	public static void welcome() {
+		System.out.println(	"-------------------------\n" +
+							"      EI3 Info - TP      \n" +
+							"  Binary images process  \n" +
+							"-------------------------\n");
+	}
+	
+	
+	/**
+	 * Opens buffered stream reader from selected image file 
+	 * 
+	 * @return BufferedReader
+	 * @throws FileNotFoundException Throw exception if image file path is wrong
+	 */
+	public static BufferedReader loadImage() throws FileNotFoundException {
+		
+		// create list of image names
+		ArrayList<String> imgNames = new ArrayList<String>();
+	    imgNames.add("lena512x512.pgm");
+	    imgNames.add("peppers512x512.pgm");
+	    
+	    // open file
+	    String imgFilePath = Config.IMG_FOLDER_PATH + imgNames.get(Config.SELECTED_IMG);
+	    System.out.println("Selected file: " + imgFilePath);
+		File imgFile = new File(imgFilePath);
+		
+		if (!imgFile.exists()) throw new FileNotFoundException();
+		
+		return new BufferedReader(new InputStreamReader(new FileInputStream(imgFile)));
+	}
+	
+	
+	/**
+	 * Informs user that program stops
+	 */
+	public static void exit() {
+		exit(null);
+	}
+	
+	/**
+	 * Informs user that program stops
+	 * @param message Additional message to send to user
+	 */
+	public static void exit(String message) {
+		if (message != null) System.out.println(message);
+		System.out.println(Config.END_OF_PROGRAM);
+	}
+	
 }
